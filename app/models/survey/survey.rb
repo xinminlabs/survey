@@ -9,6 +9,7 @@ class Survey::Survey < ActiveRecord::Base
     :questions_attributes => Survey::Question::AccessibleAttributes
 
   # relations
+  belongs_to :user
   has_many :attempts,  :dependent => :destroy
   has_many :questions, :dependent => :destroy
   accepts_nested_attributes_for :questions,
@@ -18,6 +19,7 @@ class Survey::Survey < ActiveRecord::Base
   # scopes
   scope :active,   -> { where(:active => true) }
   scope :inactive, -> { where(:active => false) }
+  scope :by_name, ->(name) { where("name LIKE ?", "%#{name}%") }
 
   # validations
   validates :attempts_number, :numericality => { :only_integer => true, :greater_than => -1 }

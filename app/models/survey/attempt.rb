@@ -12,10 +12,9 @@ class Survey::Attempt < ActiveRecord::Base
   belongs_to :participant, :polymorphic => true
   has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :answers,
-    :reject_if => ->(q) { q[:question_id].blank? || q[:option_id].blank? }
+    :reject_if => ->(q) { q[:question_id].blank? || (q[:option_id].blank? && q[:text].blank? && q[:rating].blank?) }
 
   # validations
-  validates :participant_id, :participant_type, :presence => true
   validate :check_number_of_attempts_by_survey
 
   #scopes

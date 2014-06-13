@@ -1,4 +1,5 @@
 class Survey::Question < ActiveRecord::Base
+  default_scope { order("position ASC") }
 
   self.table_name = "survey_questions"
 
@@ -7,6 +8,7 @@ class Survey::Question < ActiveRecord::Base
   # relations
   belongs_to :survey
   has_many   :options, :dependent => :destroy
+  has_many :answers
   accepts_nested_attributes_for :options,
     :reject_if => ->(a) { a[:text].blank? },
     :allow_destroy => true
@@ -20,5 +22,9 @@ class Survey::Question < ActiveRecord::Base
 
   def incorrect_options
     return options.incorrect
+  end
+
+  def bar_chart_title
+    ''
   end
 end

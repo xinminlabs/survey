@@ -1,4 +1,5 @@
 class Survey::Option < ActiveRecord::Base
+  default_scope { order("position ASC") }
 
   self.table_name = "survey_options"
 
@@ -6,6 +7,7 @@ class Survey::Option < ActiveRecord::Base
 
   #relations
   belongs_to :question
+  has_many :answers
 
   # validations
   validates :text, :presence => true, :allow_blank => false
