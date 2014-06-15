@@ -23,6 +23,12 @@ class Survey::Option < ActiveRecord::Base
     return self.text
   end
 
+  def to_char
+    return self.text if self.position.nil?
+
+    (self.question.options.index(self) + 65).chr
+  end
+
   def correct?
     return (self.correct == true)
   end
