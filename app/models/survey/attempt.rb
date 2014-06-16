@@ -28,7 +28,7 @@ class Survey::Attempt < ActiveRecord::Base
   }
 
   # callbacks
-  before_create :collect_scores
+  after_create :collect_scores
 
   def correct_answers
     return self.answers.where(:correct => true)
@@ -61,5 +61,6 @@ class Survey::Attempt < ActiveRecord::Base
         total
       end
     end
+    self.save
   end
 end
