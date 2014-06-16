@@ -54,6 +54,11 @@ class Survey::Attempt < ActiveRecord::Base
   end
 
   def collect_scores
-    self.score = self.answers.map(&:value).reduce(:+) || 0
+    self.score = self.survey.questions.inject(0) do |total, question|
+      if self.answers.where(option_ids: question.correct_options.ids).count == question_correct_options.count
+        total += 1
+      end
+      total
+    end
   end
 end
