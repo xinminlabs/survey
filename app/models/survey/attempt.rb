@@ -55,7 +55,7 @@ class Survey::Attempt < ActiveRecord::Base
 
   def collect_scores
     self.score = self.survey.questions.inject(0) do |total, question|
-      if self.answers.where(option_ids: question.correct_options.ids).count == question_correct_options.count
+      if self.answers.where(option_id: question.correct_options.ids).count == question_correct_options.count
         total += 1
       end
       total
