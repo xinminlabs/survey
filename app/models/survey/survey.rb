@@ -47,6 +47,10 @@ class Survey::Survey < ActiveRecord::Base
     available_for_participant?(participant)
   end
 
+  def average_score
+    self.attempts.average(:score).to_f.round(2)
+  end
+
   private
 
   # a surveys only can be activated if has one or more questions
