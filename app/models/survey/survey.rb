@@ -13,7 +13,7 @@ class Survey::Survey < ActiveRecord::Base
   has_many :attempts,  :dependent => :destroy
   has_many :questions, :dependent => :destroy
   accepts_nested_attributes_for :questions,
-    :reject_if => ->(q) { q[:text].blank? },
+    :reject_if => ->(q) { q[:title].blank? },
     :allow_destroy => true
 
   # scopes
