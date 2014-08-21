@@ -3,7 +3,7 @@ class Survey::Question < ActiveRecord::Base
 
   self.table_name = "survey_questions"
 
-  acceptable_attributes :text, :survey, :options_attributes => Survey::Option::AccessibleAttributes
+  acceptable_attributes :title, :survey, :options_attributes => Survey::Option::AccessibleAttributes
 
   # relations
   belongs_to :survey
@@ -14,7 +14,7 @@ class Survey::Question < ActiveRecord::Base
     :allow_destroy => true
 
   # validations
-  validates :text, :presence => true, :allow_blank => false
+  validates :title, :presence => true, :allow_blank => false
 
   def correct_options
     return options.correct
