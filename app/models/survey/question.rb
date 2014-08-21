@@ -3,7 +3,7 @@ class Survey::Question < ActiveRecord::Base
 
   self.table_name = "survey_questions"
 
-  acceptable_attributes :title, :survey, :options_attributes => Survey::Option::AccessibleAttributes
+  acceptable_attributes :title, :description, :survey, :options_attributes => Survey::Option::AccessibleAttributes
 
   # relations
   belongs_to :survey

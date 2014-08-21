@@ -14,7 +14,8 @@ class CreateSurvey < ActiveRecord::Migration
 
     create_table :survey_questions do |t|
       t.integer :survey_id
-      t.string  :text
+      t.string  :title
+      t.string :description
 
       t.timestamps
     end
